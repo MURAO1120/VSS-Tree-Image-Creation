@@ -1,11 +1,8 @@
 # できること
-
-COVESA VSS の JSON ツリーを Graphviz で PDF（または SVG/PNG）に可視化するツール<br>
-Podmanで構築しているのでホスト側には特にインストールは必要ない
+COVESA VSS の JSON ツリーを Graphviz で PDFに可視化するツール<br>
 
 ## 前提条件
 gitpod上での動作検証済み
-
 
 # 構成
 ```
@@ -39,6 +36,3 @@ python vss_draw.py vss_1.json vss_vehicle.pdf Vehicle
 | `actuator`  | 楕円             | `#b0c4ff` （ライトブルー） |
 | `attribute` | 楕円             | `#eeeeee` （薄いグレー）  |
 
-* エッジは曲線 (splines="curved")
-* ノードがエッジより前面になるよう outputorder="edgesfirst"
-* 余白は nodesep=0.35, ranksep=0.5（vss_draw.py 先頭で調整可）
