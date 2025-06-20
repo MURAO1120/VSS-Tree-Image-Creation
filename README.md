@@ -1,1 +1,44 @@
-# VSS-Tree-Image-Creation
+# できること
+
+COVESA VSS の JSON ツリーを Graphviz で PDF（または SVG/PNG）に可視化するツール<br>
+Podmanで構築しているのでホスト側には特にインストールは必要ない
+
+## 前提条件
+gitpod上での動作検証済み
+
+
+# 構成
+```
+vss-tree/
+├── Containerfile         # ランタイムのみを入れたベースイメージ
+├── vss_draw.py           # 可視化ロジック
+├── vss.json          # jsonで書かれたVSS ツリー ファイル
+
+# 使い方
+1.gidpodを起動
+githubのURLの先頭に以下を付け加える
+https://gitpod.io/#
+
+2.必要なパッケージをインストール
+ターミナル上で以下のコマンドを叩く
+sudo apt-get update
+sudo apt-get install -y graphviz
+pip install graphviz![image](https://github.com/user-attachments/assets/bb81ac4d-a71c-441d-9940-dbd981cf18d6)
+
+3.pythonファイルを実行
+python vss_draw.py vss_1.json vss_vehicle.pdf Vehicle
+
+4.pdfをダウンロードする
+
+
+# 描画仕様
+| type        | 形状             | 色 (`fillcolor`)    |
+| ----------- | --------------- | ------------------ |
+| `branch`    | 四角 (`box`)     | なし                 |
+| `sensor`    | 楕円 (`ellipse`) | `#ffcccc` （淡いピンク）  |
+| `actuator`  | 楕円             | `#b0c4ff` （ライトブルー） |
+| `attribute` | 楕円             | `#eeeeee` （薄いグレー）  |
+
+* エッジは曲線 (splines="curved")
+* ノードがエッジより前面になるよう outputorder="edgesfirst"
+* 余白は nodesep=0.35, ranksep=0.5（vss_draw.py 先頭で調整可）
