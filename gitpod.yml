@@ -1,0 +1,6 @@
+image:
+  file: Dockerfile
+
+tasks:
+  - name: Start Python
+    command: python
